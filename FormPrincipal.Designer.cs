@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnConectar = new System.Windows.Forms.Button();
+            this.btnDesconectar = new System.Windows.Forms.Button();
+            this.lbSimpleConexion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textRuta
@@ -47,7 +49,7 @@
             // textSecret
             // 
             this.textSecret.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textSecret.Location = new System.Drawing.Point(136, 138);
+            this.textSecret.Location = new System.Drawing.Point(136, 147);
             this.textSecret.Name = "textSecret";
             this.textSecret.Size = new System.Drawing.Size(531, 26);
             this.textSecret.TabIndex = 1;
@@ -68,7 +70,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(45, 138);
+            this.label1.Location = new System.Drawing.Point(45, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 17);
             this.label1.TabIndex = 3;
@@ -87,7 +89,8 @@
             // 
             // btnConectar
             // 
-            this.btnConectar.Location = new System.Drawing.Point(704, 109);
+            this.btnConectar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConectar.Location = new System.Drawing.Point(704, 89);
             this.btnConectar.Name = "btnConectar";
             this.btnConectar.Size = new System.Drawing.Size(91, 34);
             this.btnConectar.TabIndex = 5;
@@ -95,12 +98,38 @@
             this.btnConectar.UseVisualStyleBackColor = true;
             this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
             // 
+            // btnDesconectar
+            // 
+            this.btnDesconectar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDesconectar.Enabled = false;
+            this.btnDesconectar.Location = new System.Drawing.Point(704, 138);
+            this.btnDesconectar.Name = "btnDesconectar";
+            this.btnDesconectar.Size = new System.Drawing.Size(91, 34);
+            this.btnDesconectar.TabIndex = 6;
+            this.btnDesconectar.Text = "Desconectar";
+            this.btnDesconectar.UseVisualStyleBackColor = true;
+            this.btnDesconectar.Click += new System.EventHandler(this.btnDesconectar_Click);
+            // 
+            // lbSimpleConexion
+            // 
+            this.lbSimpleConexion.AutoSize = true;
+            this.lbSimpleConexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSimpleConexion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbSimpleConexion.Location = new System.Drawing.Point(813, 123);
+            this.lbSimpleConexion.Name = "lbSimpleConexion";
+            this.lbSimpleConexion.Size = new System.Drawing.Size(85, 20);
+            this.lbSimpleConexion.TabIndex = 7;
+            this.lbSimpleConexion.Text = "MENSAJE";
+            this.lbSimpleConexion.Visible = false;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(18)))));
-            this.ClientSize = new System.Drawing.Size(1032, 567);
+            this.ClientSize = new System.Drawing.Size(1061, 567);
+            this.Controls.Add(this.lbSimpleConexion);
+            this.Controls.Add(this.btnDesconectar);
             this.Controls.Add(this.btnConectar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -109,6 +138,7 @@
             this.Controls.Add(this.textRuta);
             this.Name = "FormPrincipal";
             this.Text = "Login Server";
+            this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,6 +152,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnConectar;
+        private System.Windows.Forms.Button btnDesconectar;
+        private System.Windows.Forms.Label lbSimpleConexion;
     }
 }
 
