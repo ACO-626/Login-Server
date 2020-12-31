@@ -35,11 +35,7 @@ namespace Login_Server
             InitializeComponent();
         }
 
-        private void FormPrincipal_Load(object sender, EventArgs e)
-        {
-            
 
-        }
 
         #endregion
 
@@ -59,6 +55,7 @@ namespace Login_Server
                     textSecret.Enabled = false;
                     btnConectar.Enabled = false;
                     btnDesconectar.Enabled = true;
+                    panelRegistro.Visible = true;
                 }
             }
             else
@@ -69,6 +66,7 @@ namespace Login_Server
 
         #endregion
 
+        #region Desconectar
         private void btnDesconectar_Click(object sender, EventArgs e)
         {           
             lbSimpleConexion.Text = "";            
@@ -76,6 +74,60 @@ namespace Login_Server
             textSecret.Enabled = true;
             btnConectar.Enabled = true;
             btnDesconectar.Enabled = false;
+           
+            LimpiarTexts();
+            panelRegistro.Visible = false;
         }
+        #endregion
+
+        #region Registro
+        private async void btnEnviar_Click(object sender, EventArgs e)
+        {
+            if(textName.Text!=""&&textName.Text!=""&&textPasswd.Text!=""&&textPass2.Text!="")
+            {
+                if(textPass2.Text==textPasswd.Text)
+                {
+                    var datos = new Data
+                    {
+                        user = textUser.Text,
+                        name = textName.Text,
+                        passwd = textPasswd.Text
+                    };
+
+                    SetResponse response = await cliente.SetTaskAsync("Registros/" + textUser.Text, datos);
+                    Data result = response.ResultAs<Data>();
+                    MessageBox.Show("Usuario guardado exitosamente");
+                    LimpiarTexts();
+                }else
+                {
+                    MessageBox.Show("Las contraseñas no coinciden");
+                    textPasswd.Text = "";
+                    textPass2.Text = "";
+                }
+                
+
+            }else
+            {
+                MessageBox.Show("Faltan campos por llenar");
+            }
+        }
+        #endregion
+
+        #region LimpiarRegistro
+        private void LimpiarTexts()
+        {
+            textName.Clear();
+            textPasswd.Clear();
+            textUser.Clear();
+            textPass2.Clear();
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            LimpiarTexts();
+        }
+        #endregion
     }
+
+
 }
