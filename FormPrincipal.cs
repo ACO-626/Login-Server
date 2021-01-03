@@ -83,21 +83,39 @@ namespace Login_Server
         #region Registro
         private async void btnEnviar_Click(object sender, EventArgs e)
         {
-            if(textName.Text!=""&&textName.Text!=""&&textPasswd.Text!=""&&textPass2.Text!="")
+            if(textName.Text!=""&&textName.Text!=""&&textPasswd.Text!=""&&textPass2.Text!="" && (checkMale.Checked==true||checkFem.Checked==true))
             {
                 if(textPass2.Text==textPasswd.Text)
                 {
-                    var datos = new Data
+                    string sexoHF = "Mujer";
+                    if(!checkFem.Checked)
                     {
-                        user = textUser.Text,
-                        name = textName.Text,
-                        passwd = textPasswd.Text
-                    };
+                        sexoHF = "Hombre";
+                    }
+                    try
+                    {
+                        var datos = new Data
+                        {
+                            user = textUser.Text,
+                            name = textName.Text,
+                            passwd = textPasswd.Text,
+                            tel = int.Parse(textTel.Text),
+                            sexo = sexoHF,
+                            date = comboDay.Text + "/" + comboMes.Text + "/" + comboAno.Text
 
-                    SetResponse response = await cliente.SetTaskAsync("Registros/" + textUser.Text, datos);
-                    Data result = response.ResultAs<Data>();
-                    MessageBox.Show("Usuario guardado exitosamente");
-                    LimpiarTexts();
+                        };
+                        SetResponse response = await cliente.SetTaskAsync("Registros/" + textUser.Text, datos);
+                        Data result = response.ResultAs<Data>();
+                        MessageBox.Show("Usuario guardado exitosamente");
+                        LimpiarTexts();
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("Revisar el formato de uno de los campos, ya que no es válido");
+                    }
+                    
+
+                    
                 }else
                 {
                     MessageBox.Show("Las contraseñas no coinciden");
@@ -120,11 +138,35 @@ namespace Login_Server
             textPasswd.Clear();
             textUser.Clear();
             textPass2.Clear();
+            textTel.Clear();
+            comboDay.Text = "";
+            comboAno.Text = "";
+            comboMes.Text = "";
+            checkFem.Checked = false;
+            checkMale.Checked = false;
         }
 
         private void btnClean_Click(object sender, EventArgs e)
         {
             LimpiarTexts();
+        }
+        #endregion
+
+        #region Consulta y Modificación
+        private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(textRuta.Text != "" && textSecret.Text != "")
+            {
+                string ruta = textRuta.Text;
+                string secret = textSecret.Text;
+                Form ventanaConsulta = new FormConsulta(ruta,secret);
+                ventanaConsulta.Show();
+            }
+            else
+            {
+                MessageBox.Show("Debe establecer una ruta y secreto para la base de datos");
+            }
+            
         }
         #endregion
     }
